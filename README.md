@@ -5,4 +5,35 @@ Elena Deza / Michel-Marie Deza "Encyclopedia of Distances", Elsevier Science, 20
 
 
 # Functions
+## 1. Weighted Levenshtein
+INPUT: - s1 and s2 as representations, 
+       - Wv a weight for pairs in A and B, 
+       - Ws a list of 4 weights related to the operations substitution, insertion, deletion, exchange,
+RETURN: Number of edited Letters / sum of editweights,
+CALL: WLEV( A, B, Wv, Ws )
+
+
+LEVDOR( s1, s2, Wv )
+levenshtein( s1, s2, Wv )
+LCS( vecA, vecB )
+LCF( vecA, vecB )
+containednessLCS( a, b )
+containednessLCF( a, b )
+LCP( vecA, vecB )
+bagdist( vecA, vecB )
+hamming( s1, s2, Wv )
+JA( vecA, vecB )
+JAWI( vecA, vecB )
+baire( vecA, vecB )
+generalizedcantor( vecA, vecB )
+jaccardMASZzwei( vecA, vecB )
+jaccardMASZ( vecA, vecB )
+cosineMASZ( vecA, vecB )
+quadradiffMASZ( vecA, vecB )
+diceMASZ( vecA, vecB )
+markingmetric( vecA, vecB )
+setdiffmetric( vecA, vecB )
+
+# Minimal Example
+
 
