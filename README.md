@@ -6,14 +6,22 @@ Elena Deza / Michel-Marie Deza "Encyclopedia of Distances", Elsevier Science, 20
 
 # Functions
 ## 1. Weighted Levenshtein
-INPUT: - s1 and s2 as representations, 
-       - Wv a weight for pairs in A and B, 
-       - Ws a list of 4 weights related to the operations substitution, insertion, deletion, exchange,
+INPUT: * s1 and s2 as representations, 
+       * Wv a weight for pairs in A and B, 
+       * Ws a list of 4 weights related to the operations substitution, insertion, deletion, exchange,
+       
 RETURN: Number of edited Letters / sum of editweights,
+
 CALL: WLEV( A, B, Wv, Ws )
 
+## 2. Dornau Levenshtein
+INPUT: * a text representation s1 and s2,
+       * Ws a list of 4 weights related to the operations substitution, insertion, deletion, exchange,
+       
+RETURN: sum of editweights,
 
-LEVDOR( s1, s2, Wv )
+CALL: LEVDOR( s1, s2, Wv )
+
 levenshtein( s1, s2, Wv )
 LCS( vecA, vecB )
 LCF( vecA, vecB )
