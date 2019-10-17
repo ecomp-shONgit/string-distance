@@ -24,9 +24,33 @@ Elena Deza / Michel-Marie Deza "Encyclopedia of Distances", Elsevier Science, 20
 
 *CALL:* LEVDOR( s1, s2, Wv )
 
-levenshtein( s1, s2, Wv )
-LCS( vecA, vecB )
-LCF( vecA, vecB )
+## 3. Levenshtein weightable,
+*INPUT:* 
+* s1 and s2 text representations,
+* Ws a list of 4 weights related to the operations substitution, insertion, deletion, exchange,
+        
+*RETURN:* number of edits,
+
+*CALL:* levenshtein( s1, s2, Wv )
+
+## 4. Longest Common Subsequnece 
+*NOTE:* sequnece is not substring, it is like sequencial but not next to eachother,
+
+*INPUT:* vecA and vecB text representations,
+        
+*RETURN:* 0 (distant) and  max(len(A),len(B)) (not distant),
+
+*CALL:* LCS( vecA, vecB )
+
+## 5. Longest Common Substring 
+*NOTE:* factor, sequential and next to each other members of a vector,
+            
+*INPUT:* vecA and vecB text representations,
+
+*RETURN:* 0 (distant, nothing in common) and  max(len(A),len(B)) (not distant),
+
+*CALL:* LCF( vecA, vecB )
+
 containednessLCS( a, b )
 containednessLCF( a, b )
 LCP( vecA, vecB )
