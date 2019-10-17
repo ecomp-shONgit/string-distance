@@ -15,8 +15,9 @@ RETURN: Number of edited Letters / sum of editweights,
 CALL: WLEV( A, B, Wv, Ws )
 
 ## 2. Dornau Levenshtein
-INPUT: * a text representation s1 and s2,
-       * Ws a list of 4 weights related to the operations substitution, insertion, deletion, exchange,
+INPUT: 
+* a text representation s1 and s2,
+* Ws a list of 4 weights related to the operations substitution, insertion, deletion, exchange,
        
 RETURN: sum of editweights,
 
