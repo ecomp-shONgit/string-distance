@@ -163,9 +163,9 @@ function WLEV( s1, s2, Wv, Ws ){
     return m[ lens2 ][ lens1 ]; //returns distnace similarity is 1 - (d/max(len(A,B)))
 }
 
-function LEVDOR( s1, s2, Wv ){ 
+function LEVDAM( s1, s2, Wv ){ 
     /*
-        NAME: dornau levenshtein,
+        NAME: damerau levenshtein,
         INPUT: - a text representation s1 and s2,
                - Ws a list of 4 weights related to the operations 
                  substitution, insertion, deletion, exchange,
@@ -814,7 +814,7 @@ function setdiffmetric( vecA, vecB ){
 /*
     Usage Summary of distances:
 WLEV( A, B, Wv, Ws )
-LEVDOR( s1, s2, Wv )
+LEVDAM( s1, s2, Wv )
 levenshtein( s1, s2, Wv )
 LCS( vecA, vecB )
 LCF( vecA, vecB )
