@@ -68,7 +68,7 @@ function SetSymDiff( setA, setB ){
     for( let item of AB ){
         BA.add( item );
     }*/
-    let symDiff = new Set( AB.concat( BA ) );
+    let symDiff = set( AB.concat( BA ) );
     return symDiff;
 }
 
@@ -77,7 +77,7 @@ function SetDiff( setA, setB ){
 }
 
 function SetUnsion( setA, setB ){
-    let union = new Set( [...setA, ...setB] );
+    let union = set( [...setA, ...setB] );
     return union;
 }
 
@@ -608,8 +608,8 @@ function jaccardMASZzwei( vecA, vecB ){
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     }
-    let setA = new Set( vecA );
-    let setB = new Set( vecB );
+    let setA = set( vecA );
+    let setB = set( vecB );
     return  (1.0 - parseFloat( parseFloat( len( SetSymDiff(setA, setB) )) / parseFloat( len( SetUnsion( setB, setA ) ) ) ) );
 }
 
@@ -624,8 +624,8 @@ function jaccardMASZ( vecA, vecB ){
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     }
-    let setA = new Set( vecA );
-    let setB = new Set( vecB );
+    let setA = set( vecA );
+    let setB = set( vecB );
     return  (1.0 - parseFloat( parseFloat( len( SetIntersection(setA, setB) )) / parseFloat( len( SetUnsion( setB, setA ) ) ) ) );
 }
 
@@ -802,8 +802,8 @@ function setdiffmetric( vecA, vecB ){
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     } 
-    let setA = new Set( vecA );
-    let setB = new Set( vecB );
+    let setA = set( vecA );
+    let setB = set( vecB );
     let AB = SetDiff( setA, setB );
     let BA = SetDiff( setB, setA );
     let ABlen = len( AB );
