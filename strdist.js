@@ -47,7 +47,7 @@ function SetIntersection( setA, setB ){
 }
 
 /*------------------------------------------------------------------------------
-            generalized comparison: DISTRANCES
+            generalized comparison: DISTANCES
 ------------------------------------------------------------------------------*/
 
 //NOTE: all dist/Containedness/common functions take two arrays as first input, the array could be any representation of text (string, sequnece, gram, slected words)
