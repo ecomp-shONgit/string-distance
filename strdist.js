@@ -18,9 +18,48 @@
 */
 
 /*------------------------------------------------------------------------------
-            SET OPERATIONS 
+                     Programming Helper
 ------------------------------------------------------------------------------*/
 
+function len( aA ){
+    if( aA ){
+        if( aA instanceof Set ){
+            return aA.size;
+        } else {
+            return aA.length;
+        }
+    } else {
+        return 0;
+    }
+}
+
+function set( aA ){
+    return new Set( aA );
+}
+
+function list( aS ){
+    return Array.from( aS );
+}
+
+function print(  ){//call with arbitrary arguments and print the argumnet array
+    console.log( arguments.toString() );
+}
+
+function max( a, b ){
+    return Math.max(a, b);
+}
+
+function min(a, b){
+    return Math.min(a, b);
+}
+
+let True = true;
+let False = false;
+
+
+/*------------------------------------------------------------------------------
+            SET OPERATIONS 
+------------------------------------------------------------------------------*/
 
 function SetSymDiff( setA, setB ){ 
     let AB = [...setA].filter(x => !setB.has( x ));
@@ -45,6 +84,7 @@ function SetUnsion( setA, setB ){
 function SetIntersection( setA, setB ){
     return [...setA].filter( x => setB.has( x ));
 }
+
 
 /*------------------------------------------------------------------------------
             generalized comparison: DISTANCES
