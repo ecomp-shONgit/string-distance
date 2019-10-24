@@ -90,7 +90,7 @@ function SetIntersection( setA, setB ){
             generalized comparison: DISTANCES
 ------------------------------------------------------------------------------*/
 
-//NOTE: all dist/Containedness/common functions take two arrays as first input, the array could be any representation of text (string, sequnece, gram, slected words)
+//NOTE: all dist/Containedness/common functions take two arrays as first input, the array could be any representation of text (string, sequence, gram, selected words)
 
 function WLEV( s1, s2, Wv, Ws ){ 
     /*
