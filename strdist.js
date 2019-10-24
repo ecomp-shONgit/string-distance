@@ -18,6 +18,35 @@
 */
 
 /*------------------------------------------------------------------------------
+            SET OPERATIONS 
+------------------------------------------------------------------------------*/
+
+
+function SetSymDiff( setA, setB ){ 
+    let AB = [...setA].filter(x => !setB.has( x ));
+    let BA = [...setB].filter(x => !setA.has( x ));
+    /*print(BA instanceof Array, AB instanceof Array);
+    for( let item of AB ){
+        BA.add( item );
+    }*/
+    let symDiff = new Set( AB.concat( BA ) );
+    return symDiff;
+}
+
+function SetDiff( setA, setB ){ 
+    return [...setA].filter(x => !setB.has( x ));
+}
+
+function SetUnsion( setA, setB ){
+    let union = new Set( [...setA, ...setB] );
+    return union;
+}
+
+function SetIntersection( setA, setB ){
+    return [...setA].filter( x => setB.has( x ));
+}
+
+/*------------------------------------------------------------------------------
             generalized comparison: DISTRANCES
 ------------------------------------------------------------------------------*/
 
