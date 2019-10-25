@@ -519,8 +519,8 @@ function JA( vecA, vecB ){
     let i;
     let j;
     for( i = 0; i < lenA; i+=1 ){
-        let sta = max( 0, i - matchDist );
-        let en = min( i + matchDist + 1, lenB );
+        let sta = Math.round(max( 0, i - matchDist ));
+        let en = Math.round(min( i + matchDist + 1, lenB ));
 
         for( j = sta; j < en; j+= 1 ){
             if( Bmatches[j] ){
