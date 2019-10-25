@@ -759,7 +759,7 @@ function markingmetric( vecA, vecB ){
         let iba = vecB.indexOf( vecA[i-1] );
         let ibb = vecB.indexOf( vecA[i] );
         if( iba !== -1 && ibb !== -1 ){
-            if( !iba-ibb === 1 ){
+            if( !(Math.abs(iba-ibb) === 1) ){
                 posesA.push( i ); //völlig egal welcher index aufgeschrieben wird
             }
         } else {
@@ -776,7 +776,7 @@ function markingmetric( vecA, vecB ){
         let iaa = vecA.indexOf( vecB[i-1] );
         let iab = vecA.indexOf( vecB[i] );
         if( iaa !== -1 && iab !== -1 ){
-            if( !iaa-iab === 1 ){
+            if( !(Math.abs(iaa-iab) === 1) ){
                 posesB.push( i ); //völlig egal welcher index aufgeschrieben wird
             }
         } else {
