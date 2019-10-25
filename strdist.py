@@ -7,7 +7,7 @@ import time, math, copy
 
 STRING DIST EVALUATION PROJECT 
 
-Prof. Charlotte Schubert, Alter Geschichte Leipzig 2019
+Prof. Charlotte Schubert, Alte Geschichte Leipzig 2019
 
     # GPLv3 copyrigth
     # This program is free software: you can redistribute it and/or modify
