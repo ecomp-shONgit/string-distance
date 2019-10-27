@@ -183,7 +183,7 @@ function LEVDAM( s1, s2, Wv ){
     }
     
     if( lens1 < lens2 ){
-        return LEVDOR( s2, s1 );
+        return LEVDAM( s2, s1 );
     }
     
     let m = []; // is matrix
