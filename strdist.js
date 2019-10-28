@@ -653,14 +653,14 @@ function cosineMASZ( vecA, vecB ){
     for( let i = 0; i < lenAB; i+=1 ){
         let currcount = 0;
         for(let j = 0; j < lenA; j+=1 ){
-            if( unionAB[ i ] == vecA[ j ] ){
+            if( unionAB[ i ] === vecA[ j ] ){
                 currcount += 1;
             }
         }
         x.push( currcount );
         currcount = 0;
         for( let j = 0; j < lenB; j+=1 ){
-            if( unionAB[ i ] == vecB[ j ] ){
+            if( unionAB[ i ] === vecB[ j ] ){
                 currcount += 1;
             }
         }
@@ -703,14 +703,14 @@ function quadradiffMASZ( vecA, vecB ){
     for( let i = 0; i < lenAB; i+=1 ){
         let currcount = 0;
         for(let j = 0; j < lenA; j+=1 ){
-            if( unionAB[ i ] == vecA[ j ] ){
+            if( unionAB[ i ] === vecA[ j ] ){
                 currcount += 1;
             }
         }
         x.push( currcount );
         currcount = 0;
         for( let j = 0; j < lenB; j+=1 ){
-            if( unionAB[ i ] == vecB[ j ] ){
+            if( unionAB[ i ] === vecB[ j ] ){
                 currcount += 1;
             }
         }
