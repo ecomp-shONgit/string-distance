@@ -16,12 +16,82 @@
     # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
+"use strict";
 
 /*------------------------------------------------------------------------------
-            generalized comparison: DISTRANCES
+                     Programming Helper
 ------------------------------------------------------------------------------*/
 
-//NOTE: all dist/Containedness/common functions take two arrays as first input, the array could be any representation of text (string, sequnece, gram, slected words)
+function len( aA ){
+    if( aA ){
+        if( aA instanceof Set ){
+            return aA.size;
+        } else {
+            return aA.length;
+        }
+    } else {
+        return 0;
+    }
+}
+
+function set( aA ){
+    return new Set( aA );
+}
+
+function list( aS ){
+    return Array.from( aS );
+}
+
+function print(  ){//call with arbitrary arguments and print the argumnet array
+    console.log( arguments.toString() );
+}
+
+function max( a, b ){
+    return Math.max(a, b);
+}
+
+function min(a, b){
+    return Math.min(a, b);
+}
+
+let True = true;
+let False = false;
+
+
+/*------------------------------------------------------------------------------
+            SET OPERATIONS 
+------------------------------------------------------------------------------*/
+
+function SetSymDiff( setA, setB ){ 
+    let AB = [...setA].filter(x => !setB.has( x ));
+    let BA = [...setB].filter(x => !setA.has( x ));
+    /*print(BA instanceof Array, AB instanceof Array);
+    for( let item of AB ){
+        BA.add( item );
+    }*/
+    let symDiff = set( AB.concat( BA ) );
+    return symDiff;
+}
+
+function SetDiff( setA, setB ){ 
+    return [...setA].filter(x => !setB.has( x ));
+}
+
+function SetUnsion( setA, setB ){
+    let union = set( [...setA, ...setB] );
+    return union;
+}
+
+function SetIntersection( setA, setB ){
+    return [...setA].filter( x => setB.has( x ));
+}
+
+
+/*------------------------------------------------------------------------------
+            generalized comparison: DISTANCES
+------------------------------------------------------------------------------*/
+
+//NOTE: all dist/Containedness/common functions take two arrays as first input, the array could be any representation of text (string, sequence, gram, selected words)
 
 function WLEV( s1, s2, Wv, Ws ){ 
     /*
@@ -94,9 +164,9 @@ function WLEV( s1, s2, Wv, Ws ){
     return m[ lens2 ][ lens1 ]; //returns distnace similarity is 1 - (d/max(len(A,B)))
 }
 
-function LEVDOR( s1, s2, Wv ){ 
+function LEVDAM( s1, s2, Wv ){ 
     /*
-        NAME: dornau levenshtein,
+        NAME: damerau levenshtein,
         INPUT: - a text representation s1 and s2,
                - Ws a list of 4 weights related to the operations 
                  substitution, insertion, deletion, exchange,
@@ -113,7 +183,7 @@ function LEVDOR( s1, s2, Wv ){
     }
     
     if( lens1 < lens2 ){
-        return LEVDOR( s2, s1 );
+        return LEVDAM( s2, s1 );
     }
     
     let m = []; // is matrix
@@ -449,8 +519,8 @@ function JA( vecA, vecB ){
     let i;
     let j;
     for( i = 0; i < lenA; i+=1 ){
-        let sta = max( 0, i - matchDist );
-        let en = min( i + matchDist + 1, lenB );
+        let sta = Math.round(max( 0, i - matchDist ));
+        let en = Math.round(min( i + matchDist + 1, lenB ));
 
         for( j = sta; j < en; j+= 1 ){
             if( Bmatches[j] ){
@@ -539,8 +609,8 @@ function jaccardMASZzwei( vecA, vecB ){
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     }
-    let setA = new Set( vecA );
-    let setB = new Set( vecB );
+    let setA = set( vecA );
+    let setB = set( vecB );
     return  (1.0 - parseFloat( parseFloat( len( SetSymDiff(setA, setB) )) / parseFloat( len( SetUnsion( setB, setA ) ) ) ) );
 }
 
@@ -555,8 +625,8 @@ function jaccardMASZ( vecA, vecB ){
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     }
-    let setA = new Set( vecA );
-    let setB = new Set( vecB );
+    let setA = set( vecA );
+    let setB = set( vecB );
     return  (1.0 - parseFloat( parseFloat( len( SetIntersection(setA, setB) )) / parseFloat( len( SetUnsion( setB, setA ) ) ) ) );
 }
 
@@ -583,14 +653,14 @@ function cosineMASZ( vecA, vecB ){
     for( let i = 0; i < lenAB; i+=1 ){
         let currcount = 0;
         for(let j = 0; j < lenA; j+=1 ){
-            if( unionAB[ i ] == vecA[ j ] ){
+            if( unionAB[ i ] === vecA[ j ] ){
                 currcount += 1;
             }
         }
         x.push( currcount );
         currcount = 0;
         for( let j = 0; j < lenB; j+=1 ){
-            if( unionAB[ i ] == vecB[ j ] ){
+            if( unionAB[ i ] === vecB[ j ] ){
                 currcount += 1;
             }
         }
@@ -633,14 +703,14 @@ function quadradiffMASZ( vecA, vecB ){
     for( let i = 0; i < lenAB; i+=1 ){
         let currcount = 0;
         for(let j = 0; j < lenA; j+=1 ){
-            if( unionAB[ i ] == vecA[ j ] ){
+            if( unionAB[ i ] === vecA[ j ] ){
                 currcount += 1;
             }
         }
         x.push( currcount );
         currcount = 0;
         for( let j = 0; j < lenB; j+=1 ){
-            if( unionAB[ i ] == vecB[ j ] ){
+            if( unionAB[ i ] === vecB[ j ] ){
                 currcount += 1;
             }
         }
@@ -689,7 +759,7 @@ function markingmetric( vecA, vecB ){
         let iba = vecB.indexOf( vecA[i-1] );
         let ibb = vecB.indexOf( vecA[i] );
         if( iba !== -1 && ibb !== -1 ){
-            if( !iba-ibb === 1 ){
+            if( !(Math.abs(iba-ibb) === 1) ){
                 posesA.push( i ); //völlig egal welcher index aufgeschrieben wird
             }
         } else {
@@ -706,7 +776,7 @@ function markingmetric( vecA, vecB ){
         let iaa = vecA.indexOf( vecB[i-1] );
         let iab = vecA.indexOf( vecB[i] );
         if( iaa !== -1 && iab !== -1 ){
-            if( !iaa-iab === 1 ){
+            if( !(Math.abs(iaa-iab) === 1) ){
                 posesB.push( i ); //völlig egal welcher index aufgeschrieben wird
             }
         } else {
@@ -733,8 +803,8 @@ function setdiffmetric( vecA, vecB ){
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     } 
-    let setA = new Set( vecA );
-    let setB = new Set( vecB );
+    let setA = set( vecA );
+    let setB = set( vecB );
     let AB = SetDiff( setA, setB );
     let BA = SetDiff( setB, setA );
     let ABlen = len( AB );
@@ -745,7 +815,7 @@ function setdiffmetric( vecA, vecB ){
 /*
     Usage Summary of distances:
 WLEV( A, B, Wv, Ws )
-LEVDOR( s1, s2, Wv )
+LEVDAM( s1, s2, Wv )
 levenshtein( s1, s2, Wv )
 LCS( vecA, vecB )
 LCF( vecA, vecB )

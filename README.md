@@ -15,14 +15,14 @@ Elena Deza / Michel-Marie Deza "Encyclopedia of Distances", Elsevier Science, 20
 
 *CALL:* WLEV( A, B, Wv, Ws )
 
-## 2. Dornau Levenshtein
+## 2. Damerau Levenshtein
 *INPUT:* 
 * a text representation s1 and s2,
 * Ws a list of 4 weights related to the operations substitution, insertion, deletion, exchange,
        
 *RETURN:* sum of editweights,
 
-*CALL:* LEVDOR( s1, s2, Wv )
+*CALL:* LEVDAM( s1, s2, Wv )
 
 ## 3. Levenshtein
 *INPUT:* 
@@ -175,7 +175,7 @@ Elena Deza / Michel-Marie Deza "Encyclopedia of Distances", Elsevier Science, 20
 *CALL:* setdiffmetric( vecA, vecB )
 
 # Minimal Example
-|1|2|WLEV|LEVDOR|levenshtein|LCS|LCF|containednessLCS|containednessLCF|LCP|bagdist|JA|JAWI|baire|generalizedcantor|jaccardMASZzwei|jaccardMASZ|cosineMASZ|quadradiffMASZ|diceMASZ|markingmetric|setdiffmetric|
+|1|2|WLEV|LEVDAM|levenshtein|LCS|LCF|containednessLCS|containednessLCF|LCP|bagdist|JA|JAWI|baire|generalizedcantor|jaccardMASZzwei|jaccardMASZ|cosineMASZ|quadradiffMASZ|diceMASZ|markingmetric|setdiffmetric|
 |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |
 |abcdefg|abcdefg|0|0|0|7|7|1|1|7|0|0.4523809523809524|0.8357142857142857|0.125|0.0003354626279025119|1|0|1.1102230246251565e-16|0|0|0|0|
 |abcdefg|hijklm|7|7|7|0|0|0|0|0|7|7|4.6|1|0.36787944117144233|0|1|1|3.605551275463989|1|4.962844630259907|4.02535169073515|
