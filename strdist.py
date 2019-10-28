@@ -156,6 +156,7 @@ def LEVDAM( s1, s2, Wv = [1, 1, 1, 2] ):
     
     if( lens1 < lens2 ):
         return LEVDAM( s2, s1 )
+
     
     
     m = [[0 for col in range(lens1)] for row in range(lens2)] # is matrix
