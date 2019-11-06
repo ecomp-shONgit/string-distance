@@ -17,6 +17,7 @@
 */
 
 
+
 /* MULTI BYTE STRING */
 if( function_exists('mb_internal_encoding') ) {
     mb_internal_encoding("UTF-8"); //IF extension MBSTRING is installed UTF8 Strings are computable
@@ -24,11 +25,14 @@ if( function_exists('mb_internal_encoding') ) {
     error_log("No mbstring extension - dist will fail on UTF 8 strings!", 1);//IF NOT - THROW A WARNING
 }
 
+
+
 /*------------------------------------------------------------------------------
                      Programming Helper
 ------------------------------------------------------------------------------*/
 $Infinity = INF;
 $Undefined = NULL;
+
 
 function stringTOarray( $astring ){
     $chars = array();
@@ -47,6 +51,8 @@ function handelMBSTRINGS( $athing ){
     }   
 }
 
+
+
 function len( $athing ){
     if( is_array( $athing ) ){
         return sizeof( $athing );
@@ -60,8 +66,12 @@ function len( $athing ){
 
 function Arrayfrom( $anything ){
     if( is_array( $anything ) ){
+
         $a = new ArrayObject( $anything );
         return $a->getArrayCopy( );
+
+        return $anything->getArrayCopy( );
+
     } elseif( is_string( $anything ) ){
         return str_split( $anything );
     } else {
@@ -71,8 +81,12 @@ function Arrayfrom( $anything ){
 
 function Setfrom( $anything ){
     if( is_array( $anything ) ){
+
         $a = new ArrayObject( $anything );
         return array_unique( $a->getArrayCopy( ) );
+
+        return array_unique( $anything->getArrayCopy( ) );
+
     } elseif( is_string( $anything ) ){
         return array_unique( str_split( $anything ));
     } else {
@@ -128,8 +142,11 @@ function WLEV( $s1, $s2, $Wv = [1, 1, 1, 2], $Ws = ["hk" => 2, "ui" => 1] ){
                  substitution, insertion, deletion, exchange,
         RETURN: Number of edited Letters / sum of editweights,
     */
+
     $s1 = handelMBSTRINGS( $s1 );
     $s2 = handelMBSTRINGS( $s2 );
+
+
 
     $lens1 = len( $s1 );
     $lens2 = len( $s2 );
@@ -195,8 +212,10 @@ function LEVDAM( $s1, $s2, $Wv = [1, 1, 1, 2] ){
                  substitution, insertion, deletion, exchange,
         RETURN: sum of editweights,
     */
+
     $s1 = handelMBSTRINGS( $s1 );
     $s2 = handelMBSTRINGS( $s2 );
+
 
     $lens1 = len( $s1 );
     $lens2 = len( $s2 );
@@ -254,9 +273,12 @@ function levenshteinMein( $s1, $s2, $Wv = [1, 1, 1] ){
                  substitution, insertion, deletion, exchange,
         RETURN: number of edits,
     */
+
     $s1 = handelMBSTRINGS( $s1 );
     $s2 = handelMBSTRINGS( $s2 );
 
+
+    
     $lens1 = len( $s1 );
     $lens2 = len( $s2 );
     if( $lens1 === 0 || $lens2 === 0 ){ 
@@ -308,8 +330,10 @@ function LCS( $vecA, $vecB ){
         INPUT: vecA and vecB text representations,
         RETURN: 0 (distant) and  max(len(A),len(B)) (not distant),
     */
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
+
 
     $lenA = len( $vecA );
     $lenB = len( $vecB );
@@ -344,8 +368,10 @@ function LCF( $vecA, $vecB ){
         INPUT: vecA and vecB text representations,
         RETURN: 0 (distant, nothing in common) and  max(len(A),len(B)) (not distant),
     */
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
+
 
     $lenA = len( $vecA );
     $lenB = len( $vecB );
@@ -390,8 +416,10 @@ function containednessLCS( $a, $b ){
         RETURN: 1 (contained) and 0 (not contained),
     */
 
+
     $a = handelMBSTRINGS( $a );
     $b = handelMBSTRINGS( $b );
+
 
     $lenb = len( $b );
     $lena = len( $a );
@@ -411,8 +439,10 @@ function containednessLCF( $a, $b ){
         INPUT: a and b text representations
         RETURN: 1 (contained) and 0 (not contained),
     */
+
     $a = handelMBSTRINGS( $a );
     $b = handelMBSTRINGS( $b );
+
 
     $lenb = len( $b );
     $lena = len( $a );
@@ -432,8 +462,10 @@ function LCP( $vecA, $vecB ){
         INPUT: vecA and vecB text representations,
         RETURN: 0 (distant) and  max(len(A),len(B)) (not distant),
     */
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
+
 
     $sizeofcommenprefix = 0;
     $lenMIN = min( len( $vecA ), len( $vecB ) );
@@ -459,8 +491,10 @@ function bagdist( $vecA, $vecB ){
         INPUT: vecA and vecB text representations,
         RETURN: max(len(A),len(B)) (distant) and 0 (not distant),
     */
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
+
 
     $eraseA = Arrayfrom( $vecA );
     $lenA = len( $vecA );
@@ -506,6 +540,7 @@ function JA( $vecA, $vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf (distant) and 0.0 (not distant) ???,
     */
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
 
@@ -571,6 +606,7 @@ function JAWI( $vecA, $vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf (distant) and 0.0 (not distant) ???,
     */
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
 
@@ -592,6 +628,7 @@ function baire( $vecA, $vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
     */
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
 
@@ -612,6 +649,7 @@ function notbaire( $vecA, $vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
     */
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
 
@@ -632,6 +670,7 @@ function generalizedcantor( $vecA, $vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
     */
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
 
@@ -652,6 +691,7 @@ function notgeneralizedcantor( $vecA, $vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
     */
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
 
@@ -672,6 +712,7 @@ function jaccardMASZzwei( $vecA, $vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (not distant) and 0.0 (distant) ???,
     */ 
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
 
@@ -695,6 +736,7 @@ function jaccardMASZ( $vecA, $vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
     */ 
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
 
@@ -774,6 +816,7 @@ function quadradiffMASZ( $vecA, $vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf (distant) and 0.0 (not distant) ???,
     */
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
 
@@ -823,6 +866,7 @@ function diceMASZ( $vecA, $vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
     */
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
 
@@ -847,6 +891,7 @@ function markingmetric( $vecAl, $vecBl ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf (distant) and 0.0 (not distant) ???,
     */
+
     $vecAl = handelMBSTRINGS( $vecAl );
     $vecBl = handelMBSTRINGS( $vecBl );
 
@@ -904,6 +949,7 @@ function setdiffmetric( $vecA, $vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf (distant) and 0.0 (not distant) ???,
     */
+
     $vecA = handelMBSTRINGS( $vecA );
     $vecB = handelMBSTRINGS( $vecB );
 
@@ -1078,12 +1124,16 @@ function basictestMaze( $t0 = ["abcdefg"], $t1 = ["abcdefg", "hijklm", "", "abc"
         }
     }
 
+
 //TEST IT
 //basictestMaze();
 //basictestMaze(["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"], ["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"]);
 //basictestMaze(["αὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"],["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"]);
 //basictestMaze(["κα τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"],["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"]);
 //basictestMaze(["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"],["καὶ τὸν πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"]);
+
+
+
+
+//basictestMaze();
 ?>
-
-
