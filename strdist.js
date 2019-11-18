@@ -361,7 +361,11 @@ function containednessLCS( a, b ){
         return 0;
     }
     let lcsab = LCS(a,b);
-    return min( lcsab/lena, lcsab/lenb );
+    if( lcsab === 0 ){
+        return lcsab;
+    } else {
+        return max( lcsab/lena, lcsab/lenb );
+    }
 }
 
 function containednessLCF( a, b ){
@@ -376,7 +380,11 @@ function containednessLCF( a, b ){
         return 0;
     }
     let lcfab = LCF(a,b);
-    return min( lcfab/lena, lcfab/lenb);
+    if( lcfab === 0 ){
+        return lcfab;
+    } else {
+        return max( lcfab/lena, lcfab/lenb);
+    }
 }
 
 function LCP( vecA, vecB ){
