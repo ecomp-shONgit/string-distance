@@ -24,7 +24,7 @@ Prof. Charlotte Schubert, Alte Geschichte Leipzig 2019
 '''
 
 
-'''JS/PYTHON'''
+'''PYTHON3'''
 
 Infinity = math.inf
 
@@ -313,7 +313,10 @@ def containednessLCS( a, b ):
         return 0
     
     lcsab = LCS(a,b)
-    return min( lcsab/lena, lcsab/lenb )
+    if lcsab == 0:
+        return lcsab
+    else:
+        return max( lcsab/lena, lcsab/lenb )
 
 
 def containednessLCF( a, b ):
@@ -328,7 +331,10 @@ def containednessLCF( a, b ):
         return 0
     
     lcfab = LCF(a,b)
-    return min( lcfab/lena, lcfab/lenb)
+    if lcfab == 0:
+        return lcfab
+    else:
+        return max( lcfab/lena, lcfab/lenb)
 
 
 def LCP( vecA, vecB ):
