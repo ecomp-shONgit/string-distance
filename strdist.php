@@ -427,7 +427,11 @@ function containednessLCS( $a, $b ){
         return 0;
     }
     $lcsab = LCS( $a, $b );
-    return min( $lcsab/$lena, $lcsab/$lenb );
+    if( $lcsab === 0 ){
+        return $lcsab;
+    } else {
+        return max( $lcsab/$lena, $lcsab/$lenb );
+    }
 }
 
 //echo "<br> containednessLCS: <br>";
@@ -450,7 +454,11 @@ function containednessLCF( $a, $b ){
         return 0;
     }
     $lcfab = LCF( $a, $b);
-    return min( $lcfab/$lena, $lcfab/$lenb);
+    if( $lcfab === 0 ){
+        return $lcfab;
+    } else {
+        return max( $lcfab/$lena, $lcfab/$lenb );
+    }
 }
 
 //echo "<br> containednessLCF: <br>";
