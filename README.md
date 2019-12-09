@@ -5,6 +5,7 @@ Elena Deza / Michel-Marie Deza "Encyclopedia of Distances", Elsevier Science, 20
 
 # Examples
 http://ecomparatio.net/~khk/string-distance-master/test_strdist.php
+
 http://ecomparatio.net/~khk/string-distance-master/test_strdist_rulesets.php
 
 # Functions
