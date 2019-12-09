@@ -3,6 +3,9 @@ A set of (string) distance functions written in JavaScript. Every function could
 
 Elena Deza / Michel-Marie Deza "Encyclopedia of Distances", Elsevier Science, 2009 (http://www.uco.es/users/ma1fegan/Comunes/asignaturas/vision/Encyclopedia-of-distances-2009.pdf)
 
+# Examples
+http://ecomparatio.net/~khk/string-distance-master/test_strdist.php
+http://ecomparatio.net/~khk/string-distance-master/test_strdist_rulesets.php
 
 # Functions
 ## 1. Weighted Levenshtein
