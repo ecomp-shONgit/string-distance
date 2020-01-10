@@ -695,7 +695,7 @@ function generalizedcantor( $vecA, $vecB ){
 
 function notgeneralizedcantor( $vecA, $vecB ){
     /* 
-        NAME: gen. cantor distance, 
+        NAME: not gen. cantor distance, 
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
     */
