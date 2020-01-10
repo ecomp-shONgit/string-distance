@@ -1,7 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import time, math, copy
+import time, math, copy, sys, os
 
 '''
 
@@ -397,47 +397,6 @@ def bagdist( vecA, vecB ):
             countinA+=1
     return max( countinA, countinB )
 
-
-def hamming( s1, s2, Wv = [1, 1, 1] ): 
-    '''
-        NAME: hamming a special case of levenshstein, 
-              same string length and just substitutions,
-        INPUT: - s1, s2 representations of txt
-               - Wv a 3 array of operation weights, CAN BE NUMBER,
-        RETURN: ,
-    '''
-    lens1 = len( s1 )
-    lens2 = len( s2 )
-    if( lens1 != lens2 ):
-        return max( lens1, lens2 )
-
-    m = [] # is matrix
-    i
-    j
-    if( lens1 == 0 ): 
-        return lens2 
-    
-    if( lens2 == 0 ): 
-        return lens1 
-    
-    # increment along the first column of each row
-    for i in range( lens2 ):
-      m[ i ] = [i]
-    
-    # increment each column in the first row
-    for j in range( lens1 ):
-      m[0][j] = j
-    
-    # Fill in the rest of the matrix
-    for i in range( 1, lens2 ):
-      for j in range( 1, lens1 ):
-        if( s2[ i-1 ] == s1[ j-1 ] ):
-          m[i][j] = m[i-1][j-1]
-        else:
-          m[i][j] = m[i-1][j-1] + Wv[0]
-    return m[ lens2 ][ lens1 ]
-
-
 def JA( vecA, vecB ):
     ''' 
         NAME: jaro distance,
@@ -525,6 +484,19 @@ def baire( vecA, vecB ):
     
     return ( 1 / (1 + LCP(vecA, vecB)) )
 
+def notbaire( vecA, vecB ):
+    ''' 
+        NAME: not baire distance, just same notation
+        INPUT: vecA, vecB text represenations,
+        RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
+    '''
+    lenA = len( vecA )
+    lenB = len( vecB )
+    if( lenA == 0 or lenB == 0 ):
+        return Infinity 
+    
+    return ( 1 / (1 + LCP(vecA, vecB)) )
+
 
 def generalizedcantor( vecA, vecB ):
     ''' 
@@ -538,6 +510,19 @@ def generalizedcantor( vecA, vecB ):
         return Infinity 
     
     return math.pow( (1/math.e), (1 + LCP(vecA, vecB)) ) #a 1/Math.E can also be 1/2
+
+def notgeneralizedcantor( vecA, vecB ):
+    ''' 
+        NAME: not gen. cantor distance, 
+        INPUT: vecA, vecB text represenations,
+        RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
+    '''
+    lenA = len( vecA )
+    lenB = len( vecB )
+    if( lenA == 0 or lenB == 0 ):
+        return Infinity 
+    
+    return math.pow( (1/math.e), (1 + LCF(vecA, vecB)) ) 
 
 
 def jaccardMASZzwei( vecA, vecB ):
@@ -838,13 +823,73 @@ def basictestMaze( t0 = ["abcdefg"], t1 = ["abcdefg", "hijklm", "", "abc", "dfg"
 
 
 if __name__ == "__main__":
+    presi = 3
+    #python3 strdist.py DISTTYPE str1 str2
+    argvb = list(map(os.fsencode, sys.argv))
+    
+    sys.argv[ 2 ] = argvb[2].decode("utf-8")
+    sys.argv[ 3 ] = argvb[3].decode("utf-8")
+    if( len( sys.argv ) == 4 ):
+        #print(list(a), len(a), "----", sys.argv[3], len(sys.argv[3]))
+        if( sys.argv[1] == "WLEV" ):
+            print( WLEV( sys.argv[ 2 ], sys.argv[ 3 ] ) );
+        elif( sys.argv[1] == "LEVDAM" ):
+            print( LEVDAM( sys.argv[ 2 ], sys.argv[ 3 ] ) );
+        elif( sys.argv[1] == "levenshtein" ):
+            print( levenshtein( sys.argv[ 2 ], sys.argv[ 3 ] ) );
+        elif( sys.argv[1] == "LCS" ):
+            print( LCS( sys.argv[ 2 ], sys.argv[ 3 ] ) );
+        elif( sys.argv[1] == "LCF" ):
+            print( LCF( sys.argv[ 2 ], sys.argv[ 3 ] ) );
+        elif( sys.argv[1] == "containednessLCS" ):
+            print( round(containednessLCS( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "containednessLCF" ):
+            print( round(containednessLCF( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "LCP" ):
+            print( LCP( sys.argv[ 2 ], sys.argv[ 3 ] ) );
+        elif( sys.argv[1] == "bagdist" ):
+            print( round(bagdist( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "JA" ):
+            print( round(JA( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "JAWI" ):
+            print( round(JAWI( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "baire" ):
+            print( round(baire( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "notbaire" ):
+            print( round(notbaire( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "generalizedcantor" ):
+            print( round(generalizedcantor( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "notgeneralizedcantor" ):
+            print( round(notgeneralizedcantor( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "jaccardMASZzwei" ):
+            print( round(jaccardMASZzwei( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "jaccardMASZ" ):
+            print( round(jaccardMASZ( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "cosineMASZ" ):
+            print( round(cosineMASZ( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "quadradiffMASZ" ):
+            print( round(quadradiffMASZ( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "diceMASZ" ):
+            print( round(diceMASZ( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "markingmetric" ):
+            print( round(markingmetric( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "setdiffmetric" ):
+            print( round(setdiffmetric( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        elif( sys.argv[1] == "all" ):
+            print( WLEV( sys.argv[ 2 ], sys.argv[ 3 ] ), ";", LEVDAM( sys.argv[ 2 ], sys.argv[ 3 ] ), ";", levenshtein( sys.argv[ 2 ], sys.argv[ 3 ] ), ";", LCS( sys.argv[ 2 ], sys.argv[ 3 ] ), ";", LCF( sys.argv[ 2 ], sys.argv[ 3 ] ), ";", round(containednessLCS( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(containednessLCF( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", LCP( sys.argv[ 2 ], sys.argv[ 3 ] ), ";", round(bagdist( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(JA( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(JAWI( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(baire( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(notbaire( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(generalizedcantor( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(notgeneralizedcantor( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(jaccardMASZzwei( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(jaccardMASZ( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(cosineMASZ( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(quadradiffMASZ( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(diceMASZ( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(markingmetric( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(setdiffmetric( sys.argv[ 2 ], sys.argv[ 3 ] ),presi), ";", round(setdiffmetric( sys.argv[ 2 ], sys.argv[ 3 ] ),presi) );
+        else:
+            print( "none" )
+    elif( len( sys.argv ) == 3 ): 
+        basictestMaze([sys.argv[1]],[sys.argv[2]]);
+    else:
+        print("String Dist Test")
+        basictestMaze();
+        basictestMaze(["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"], ["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"]);
+        basictestMaze(["αὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"],["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"]);
+        basictestMaze(["κα τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"],["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"]);
+        basictestMaze(["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"],["καὶ τὸν πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"]);
 
-    print("String Dist Test")
-    basictestMaze();
-    basictestMaze(["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"], ["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"]);
-    basictestMaze(["αὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"],["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"]);
-    basictestMaze(["κα τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"],["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"]);
-    basictestMaze(["καὶ τὸν αὑτοῦ πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"],["καὶ τὸν πατέρα, ἐμὲ μὲν διδάσκοντι, ἐκεῖνον δὲ νουθε‐"]);
+    #print("----------")
 '''
     Usage Summary of distances:
 WLEV( A, B, Wv, Ws )
@@ -856,11 +901,13 @@ containednessLCS( a, b )
 containednessLCF( a, b )
 LCP( vecA, vecB )
 bagdist( vecA, vecB )
-hamming( s1, s2, Wv )
+notbagdist( vecA, vecB )
 JA( vecA, vecB )
 JAWI( vecA, vecB )
 baire( vecA, vecB )
+notbaire( vecA, vecB )
 generalizedcantor( vecA, vecB )
+notgeneralizedcantor( vecA, vecB )
 jaccardMASZzwei( vecA, vecB )
 jaccardMASZ( vecA, vecB )
 cosineMASZ( vecA, vecB )
