@@ -1,9 +1,12 @@
 # String Distance Implementation JS / PYTHON / PHP
-A set of (string) distance functions written in JavaScript. Every function could be called with two representations of text to compute a distance, no matter if a bag of words represenations or a ngram represenation, string represenation is used. The implementation is derived from 
+A set of (string) distance-messures functions written in JavaScript / Python / PHP. Every function could be called with two representations of text to compute a distance, no matter if a bag of words represenations or a ngram represenation, string represenation is used. The implementation is derived from 
 
 Elena Deza / Michel-Marie Deza "Encyclopedia of Distances", Elsevier Science, 2009 (http://www.uco.es/users/ma1fegan/Comunes/asignaturas/vision/Encyclopedia-of-distances-2009.pdf)
 
+Note: for this project we consider the terms messure (distance-messure / distance-function, taken from computer science) and metric to denote the same thing, they do divide math in to messure theory and topology, but we eat from both trees
+
 # Examples
+
 http://ecomparatio.net/~khk/string-distance-master/test_strdist.php
 
 http://ecomparatio.net/~khk/string-distance-master/test_strdist_rulesets.php
@@ -89,34 +92,35 @@ http://ecomparatio.net/~khk/string-distance-master/test_strdist_rulesets.php
 
 *CALL:* bagdist( vecA, vecB )
 
-## 10. Hamming Dist
-*NOTE:* special case of levenshstein,
-*INPUT:*
-* s1, s2 representations of txt              
-* Wv a 3 array of operation weights, CAN BE NUMBER,
-
-*CALL:* hamming( s1, s2, Wv )
-
-## 11. Jaro Distance
+## 10. Jaro Distance
 *INPUT:* vecA, vecB text represenations,
 
 *RETURN:* Inf (distant) and 0.0 (not distant) (?),
 
 *CALL:* JA( vecA, vecB )
 
-## 12. Jaro-Winkler Distance
+## 11. Jaro-Winkler Distance
 *INPUT:* vecA, vecB text represenations,
 
 *RETURN:* Inf (distant) and 0.0 (not distant) (?),
 
 *CALL:* JAWI( vecA, vecB )
 
-## 13. Baire Distance
+## 12. Baire Distance
 *INPUT:* vecA, vecB text represenations,
        
 *RETURN:* Inf/1 (distant) and 0.0 (not distant),
 
 *CALL:* baire( vecA, vecB )
+
+## 13. not Baire Distance
+*INPUT:* vecA, vecB text represenations,
+       
+*RETURN:* Inf/1 (distant) and 0.0 (not distant),
+
+*CALL:* notbaire( vecA, vecB )
+
+*NOTE:* same as baire but uses LCF
 
 ## 14. Gen. Cantor Distance
 *INPUT:* vecA, vecB text represenations,
@@ -125,7 +129,16 @@ http://ecomparatio.net/~khk/string-distance-master/test_strdist_rulesets.php
 
 *CALL:* generalizedcantor( vecA, vecB )
 
-## 15. JaccardZwei
+## 15. not Gen. Cantor Distance
+*INPUT:* vecA, vecB text represenations,
+       
+*RETURN:* Inf/1 (distant) and 0.0 (not distant),
+
+*CALL:* notgeneralizedcantor( vecA, vecB )
+
+*NOTE:* same as generalizedcantor but uses LPC
+
+## 16. JaccardZwei
 *NOTE:* inverted Jaccard
 
 *INPUT:* vecA, vecB text represenations,
@@ -134,21 +147,21 @@ http://ecomparatio.net/~khk/string-distance-master/test_strdist_rulesets.php
 
 *CALL:* jaccardMASZzwei( vecA, vecB )
 
-## 16. Jaccard Distance
+## 17. Jaccard Distance
 *INPUT:* vecA, vecB text represenations,
        
 *RETURN:* Inf/1 (distant) and 0.0 (not distant),
 
 *CALL:* jaccardMASZ( vecA, vecB )
 
-## 17. Cosine Distance
+## 18. Cosine Distance
 *INPUT:* vecA, vecB text represenations,
        
 *RETURN:* Inf/1 (distant) and 0.0 (not distant),
 
 *CALL:* cosineMASZ( vecA, vecB )
 
-## 18. Quadratic Difference Distance 
+## 19. Quadratic Difference Distance 
 *NOTE:* vec A and B are arrays of ngrams, quadra diff is a messure taken from the haufigkeitsvektor of A and B
 
 *INPUT:* vecA, vecB text represenations,
@@ -157,21 +170,21 @@ http://ecomparatio.net/~khk/string-distance-master/test_strdist_rulesets.php
 
 *CALL:* quadradiffMASZ( vecA, vecB )
 
-## 19. Dice Coefficent Distance
+## 20. Dice Coefficent Distance
 *INPUT:* vecA, vecB text represenations,
        
 *RETURN:* Inf/1 (distant) and 0.0 (not distant),
 
 *CALL:* diceMASZ( vecA, vecB )
 
-## 20. Marking Distance
+## 21. Marking Distance
 *INPUT:* vecA, vecB text represenations,
 
 *RETURN:* Inf (distant) and 0.0 (not distant) (?),
 
 *CALL:* markingmetric( vecA, vecB )
 
-## 21. Set Difference Distance 
+## 22. Set Difference Distance 
 *INPUT:* vecA, vecB text represenations,
 
 *RETURN:* Inf (distant) and 0.0 (not distant) (?),
