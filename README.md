@@ -210,3 +210,9 @@ http://ecomparatio.net/~khk/string-distance-master/test_strdist_rulesets.php
 ## PHP Version
 If mbstring extension is installed, every string is treated as array. That gives better distance results than PHP levenshtein.
 
+## Python Version
+Use Python3.x!
+
+## JS Version
+Just tested with the latest Chrome and Forefox, not on server environment, no other interpreters tested. Drop a issue if needed.
+
