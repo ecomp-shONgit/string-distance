@@ -516,7 +516,7 @@ function readCSVFile($file,$deli=';')
   return $r;     
   }//end function readCSVFile
 
-###
+
 function translitString($str,$ruleset="Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC;")
   {
    # for more infos about the translitare see
@@ -528,4 +528,4 @@ function translitString($str,$ruleset="Any-Latin; NFD; [:Nonspacing Mark:] Remov
   
   return $str;
   }//end function
-?>
+

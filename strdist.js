@@ -43,7 +43,9 @@ function list( aS ){
 }
 
 function print(  ){//call with arbitrary arguments and print the argumnet array
-    console.log( arguments.toString() );
+    for(let a in arguments){
+        console.log( a, arguments[a].toString() );
+    }
 }
 
 function max( a, b ){
@@ -54,8 +56,8 @@ function min(a, b){
     return Math.min(a, b);
 }
 
-let True = true;
-let False = false;
+const True = true;
+const False = false;
 
 
 /*------------------------------------------------------------------------------
@@ -361,7 +363,11 @@ function containednessLCS( a, b ){
         return 0;
     }
     let lcsab = LCS(a,b);
-    return min( lcsab/lena, lcsab/lenb );
+    if( lcsab === 0 ){
+        return lcsab;
+    } else {
+        return max( lcsab/lena, lcsab/lenb );
+    }
 }
 
 function containednessLCF( a, b ){
@@ -376,7 +382,11 @@ function containednessLCF( a, b ){
         return 0;
     }
     let lcfab = LCF(a,b);
-    return min( lcfab/lena, lcfab/lenb);
+    if( lcfab === 0 ){
+        return lcfab;
+    } else {
+        return max( lcfab/lena, lcfab/lenb);
+    }
 }
 
 function LCP( vecA, vecB ){
@@ -441,53 +451,6 @@ function bagdist( vecA, vecB ){
     }
     
     return max( countinA, countinB );
-}
-
-function hamming( s1, s2, Wv ){ 
-    /*
-        NAME: hamming a special case of levenshstein, 
-              same string length and just substitutions,
-        INPUT: - s1, s2 representations of txt
-               - Wv a 3 array of operation weights, CAN BE NUMBER,
-        RETURN: ,
-    */
-    let lens1 = len( s1 );
-    let lens2 = len( s2 );
-    if( lens1 !== lens2 ){
-        return max( lens1, lens2 );
-    }
-    if( Wv === undefined ){ //optional param
-        Wv = [1, 1, 1];
-    }
-    let m = []; // is matrix
-    let i;
-    let j;
-    if(lens1 === 0){ 
-        return lens2; 
-    }
-    if(lens2 === 0){ 
-        return lens1; 
-    }
-    // increment along the first column of each row
-    for( i = 0; i <= lens2; i+=1 ){
-      m[ i ] = [i];
-    }
-    // increment each column in the first row
-    for( j = 0; j <= lens1; j+=1 ){
-      m[0][j] = j;
-    }
-    // Fill in the rest of the matrix
-    for( i = 1; i <= lens2; i+=1 ){
-      for( j = 1; j <= lens1; j+=1 ){
-        if( s2[ i-1 ] === s1[ j-1 ] ){
-          m[i][j] = m[i-1][j-1];
-        } else {
-          m[i][j] = m[i-1][j-1] + Wv[0];
-                    
-        }
-      }
-    }
-    return m[ lens2 ][ lens1 ];
 }
 
 function JA( vecA, vecB ){ 
@@ -584,6 +547,20 @@ function baire( vecA, vecB ){
     return ( 1 / (1 + LCP(vecA, vecB)) );
 }
 
+function notbaire( vecA, vecB ){
+    /* 
+        NAME: not baire distance, just same notation
+        INPUT: vecA, vecB text represenations,
+        RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
+    */
+    let lenA = len( vecA );
+    let lenB = len( vecB );
+    if( lenA === 0 || lenB === 0 ){ 
+        return Infinity; 
+    }
+    return ( 1 / (1 + LCP(vecA, vecB)) );
+}
+
 function generalizedcantor( vecA, vecB ){
     /* 
         NAME: gen. cantor distance, 
@@ -596,6 +573,20 @@ function generalizedcantor( vecA, vecB ){
         return Infinity; 
     }
     return Math.pow( (1/Math.E), (1 + LCP(vecA, vecB)) ); //a 1/Math.E can also be 1/2
+}
+
+function notgeneralizedcantor( vecA, vecB ){
+    /* 
+        NAME: not gen. cantor distance, 
+        INPUT: vecA, vecB text represenations,
+        RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
+    */
+    let lenA = len( vecA );
+    let lenB = len( vecB );
+    if( lenA === 0 || lenB === 0 ){ 
+        return Infinity; 
+    }
+    return Math.pow( (1/Math.E), (1 + LCF(vecA, vecB)) ); 
 }
 
 function jaccardMASZzwei( vecA, vecB ){
@@ -823,11 +814,12 @@ containednessLCS( a, b )
 containednessLCF( a, b )
 LCP( vecA, vecB )
 bagdist( vecA, vecB )
-hamming( s1, s2, Wv )
 JA( vecA, vecB )
 JAWI( vecA, vecB )
 baire( vecA, vecB )
+notbaire( vecA, vecB )
 generalizedcantor( vecA, vecB )
+notgeneralizedcantor( vecA, vecB )
 jaccardMASZzwei( vecA, vecB )
 jaccardMASZ( vecA, vecB )
 cosineMASZ( vecA, vecB )
