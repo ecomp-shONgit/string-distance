@@ -6,7 +6,6 @@ Elena Deza / Michel-Marie Deza "Encyclopedia of Distances", Elsevier Science, 20
 C´edric Villani, "Optimal transport, old and new", Springer, 2008
 (http://elenaher.dinauz.org/B07D.StFlour.pdf)
 
-Note: for this project we consider the terms messure (distance-messure / distance-function, taken from computer science) and metric to denote the same thing, they do divide math in to messure theory and topology, but we eat from both trees
 
 # Examples
 
