@@ -43,7 +43,7 @@ function list( aS ){
 }
 
 function print(  ){//call with arbitrary arguments and print the argumnet array
-    for(let a in arguments){
+    for( let a in arguments ){
         console.log( a, arguments[a].toString() );
     }
 }
@@ -105,8 +105,8 @@ function WLEV( s1, s2, Wv, Ws ){
         RETURN: Number of edited Letters / sum of editweights,
 
     */
-    let lens1 = len( s1 );
-    let lens2 = len( s2 );
+    const lens1 = len( s1 );
+    const lens2 = len( s2 );
     
     if( lens1 === 0 || lens2 === 0 ){ 
         return Infinity; 
@@ -170,13 +170,13 @@ function LEVDAM( s1, s2, Wv ){
     /*
         NAME: damerau levenshtein,
         INPUT: - a text representation s1 and s2,
-               - Ws a list of 4 weights related to the operations 
+               - Wv a list of 4 weights related to the operations 
                  substitution, insertion, deletion, exchange,
         RETURN: sum of editweights,
 
     */
-    let lens1 = len( s1 );
-    let lens2 = len( s2 );
+    const lens1 = len( s1 );
+    const lens2 = len( s2 );
     if( lens1 === 0 || lens2 === 0 ){ 
         return Infinity; 
     }
@@ -230,13 +230,13 @@ function levenshtein( s1, s2, Wv ){
     /*
         NAME: Levenshtein wie immer, weightable,
         INPUT: - s1 and s2 text representations,
-               - Ws a list of 4 weights related to the operations 
+               - Wv a list of 4 weights related to the operations 
                  substitution, insertion, deletion, exchange,
         RETURN: number of edits,
     */
     
-    let lens1 = len( s1 );
-    let lens2 = len( s2 );
+    const lens1 = len( s1 );
+    const lens2 = len( s2 );
     if( lens1 === 0 || lens2 === 0 ){ 
         return Infinity; 
     }
@@ -288,8 +288,8 @@ function LCS( vecA, vecB ){
         INPUT: vecA and vecB text representations,
         RETURN: 0 (distant) and  max(len(A),len(B)) (not distant),
     */
-    let lenA = len(vecA);
-    let lenB = len(vecB);
+    const lenA = len(vecA);
+    const lenB = len(vecB);
     if( lenA === 0 || lenB === 0 ){ 
         return 0; 
     }
@@ -318,8 +318,8 @@ function LCF( vecA, vecB ){
         INPUT: vecA and vecB text representations,
         RETURN: 0 (distant, nothing in common) and  max(len(A),len(B)) (not distant),
     */
-    let lenA = len(vecA);
-    let lenB = len(vecB);
+    const lenA = len(vecA);
+    const lenB = len(vecB);
     if( lenA === 0 || lenB === 0 ){ 
         return 0; 
     }
@@ -357,8 +357,8 @@ function containednessLCS( a, b ){
         INPUT: a and b text representations,
         RETURN: 1 (contained) and 0 (not contained),
     */
-    let lenb = len(b);
-    let lena = len(a);
+    const lenb = len(b);
+    const lena = len(a);
     if( lena === 0 || lenb === 0 ){
         return 0;
     }
@@ -376,8 +376,8 @@ function containednessLCF( a, b ){
         INPUT: a and b text representations
         RETURN: 1 (contained) and 0 (not contained),
     */
-    let lenb = len(b);
-    let lena = len(a);
+    const lenb = len(b);
+    const lena = len(a);
     if( lena === 0 || lenb === 0 ){
         return 0;
     }
@@ -418,9 +418,9 @@ function bagdist( vecA, vecB ){
         RETURN: max(len(A),len(B)) (distant) and 0 (not distant),
     */
     let eraseA = Array.from( vecA );
-    let lenA = len( vecA );
+    const lenA = len( vecA );
     let eraseB = Array.from( vecB );
-    let lenB = len( vecB );
+    const lenB = len( vecB );
     
     let sliceindex = -1;
     let i = 0;
@@ -460,8 +460,8 @@ function JA( vecA, vecB ){
         RETURN: Inf (distant) and 0.0 (not distant) ???,
     */
 
-    let lenA = len( vecA );
-    let lenB = len( vecB );
+    const lenA = len( vecA );
+    const lenB = len( vecB );
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     }
@@ -524,8 +524,8 @@ function JAWI( vecA, vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf (distant) and 0.0 (not distant) ???,
     */
-    let lenA = len( vecA );
-    let lenB = len( vecB );
+    const lenA = len( vecA );
+    const lenB = len( vecB );
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     }
@@ -539,22 +539,8 @@ function baire( vecA, vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
     */
-    let lenA = len( vecA );
-    let lenB = len( vecB );
-    if( lenA === 0 || lenB === 0 ){ 
-        return Infinity; 
-    }
-    return ( 1 / (1 + LCP(vecA, vecB)) );
-}
-
-function notbaire( vecA, vecB ){
-    /* 
-        NAME: not baire distance, just same notation
-        INPUT: vecA, vecB text represenations,
-        RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
-    */
-    let lenA = len( vecA );
-    let lenB = len( vecB );
+    const lenA = len( vecA );
+    const lenB = len( vecB );
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     }
@@ -567,8 +553,8 @@ function generalizedcantor( vecA, vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
     */
-    let lenA = len( vecA );
-    let lenB = len( vecB );
+    const lenA = len( vecA );
+    const lenB = len( vecB );
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     }
@@ -581,8 +567,8 @@ function notgeneralizedcantor( vecA, vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
     */
-    let lenA = len( vecA );
-    let lenB = len( vecB );
+    const lenA = len( vecA );
+    const lenB = len( vecB );
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     }
@@ -595,8 +581,8 @@ function jaccardMASZzwei( vecA, vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (not distant) and 0.0 (distant) ???,
     */ 
-    let lenA = len( vecA );
-    let lenB = len( vecB );
+    const lenA = len( vecA );
+    const lenB = len( vecB );
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     }
@@ -611,8 +597,8 @@ function jaccardMASZ( vecA, vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
     */ 
-    let lenA = len( vecA );
-    let lenB = len( vecB );
+    const lenA = len( vecA );
+    const lenB = len( vecB );
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     }
@@ -627,8 +613,8 @@ function cosineMASZ( vecA, vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
     */
-    let lenA = len( vecA );
-    let lenB = len( vecB );
+    const lenA = len( vecA );
+    const lenB = len( vecB );
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     }  
@@ -640,7 +626,7 @@ function cosineMASZ( vecA, vecB ){
     //occurenz count of gram in A or B
     let x = []; //A
     let y = []; //B
-    let lenAB = len( unionAB );
+    const lenAB = len( unionAB );
     for( let i = 0; i < lenAB; i+=1 ){
         let currcount = 0;
         for(let j = 0; j < lenA; j+=1 ){
@@ -660,7 +646,7 @@ function cosineMASZ( vecA, vecB ){
     let summederquadrateA = 0;
     let summederquadrateB = 0;
     let scalarprod = 0;
-    let lenx = len(x);
+    const lenx = len(x);
     for( let u = 0; u < lenx; u+=1 ){
         summederquadrateA += x[ u ] * x[ u ]; 
         summederquadrateB += y[ u ] * y[ u ];
@@ -678,8 +664,8 @@ function quadradiffMASZ( vecA, vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf (distant) and 0.0 (not distant) ???,
     */
-    let lenA = len( vecA );
-    let lenB = len( vecB );
+    const lenA = len( vecA );
+    const lenB = len( vecB );
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     } 
@@ -690,7 +676,7 @@ function quadradiffMASZ( vecA, vecB ){
     //occurenz count of gram in A or B
     let x = []; //A
     let y = []; //B  
-    let lenAB = len( unionAB );
+    const lenAB = len( unionAB );
     for( let i = 0; i < lenAB; i+=1 ){
         let currcount = 0;
         for(let j = 0; j < lenA; j+=1 ){
@@ -708,7 +694,7 @@ function quadradiffMASZ( vecA, vecB ){
         y.push( currcount );
     }   
     let sumitup = 0;
-    let lenx = len( x );
+    const lenx = len( x );
     for( let u = 0; u < lenx; u+=1 ){
         sumitup += ( Math.abs(x[ u ] - y[ u ]) )*( Math.abs(x[ u ] - y[ u ]) );
     }
@@ -721,8 +707,8 @@ function diceMASZ( vecA, vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf/1 (distant) and 0.0 (not distant) ???,
     */
-    let lenA = len( vecA );
-    let lenB = len( vecB );
+    const lenA = len( vecA );
+    const lenB = len( vecB );
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     } 
@@ -739,8 +725,8 @@ function markingmetric( vecA, vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf (distant) and 0.0 (not distant) ???,
     */
-    let lenA = len( vecA );
-    let lenB = len( vecB );
+    const lenA = len( vecA );
+    const lenB = len( vecB );
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     } 
@@ -789,8 +775,8 @@ function setdiffmetric( vecA, vecB ){
         INPUT: vecA, vecB text represenations,
         RETURN: Inf (distant) and 0.0 (not distant) ???,
     */
-    let lenA = len( vecA );
-    let lenB = len( vecB );
+    const lenA = len( vecA );
+    const lenB = len( vecB );
     if( lenA === 0 || lenB === 0 ){ 
         return Infinity; 
     } 
@@ -798,8 +784,8 @@ function setdiffmetric( vecA, vecB ){
     let setB = set( vecB );
     let AB = SetDiff( setA, setB );
     let BA = SetDiff( setB, setA );
-    let ABlen = len( AB );
-    let BAlen = len( BA );
+    const ABlen = len( AB );
+    const BAlen = len( BA );
     return Math.log( ( ABlen+1 )*( BAlen+1 ) );
 }
 
@@ -817,7 +803,6 @@ bagdist( vecA, vecB )
 JA( vecA, vecB )
 JAWI( vecA, vecB )
 baire( vecA, vecB )
-notbaire( vecA, vecB )
 generalizedcantor( vecA, vecB )
 notgeneralizedcantor( vecA, vecB )
 jaccardMASZzwei( vecA, vecB )
