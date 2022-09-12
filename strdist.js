@@ -27,7 +27,11 @@ function len( aA ){
         if( aA instanceof Set ){
             return aA.size;
         } else {
-            return aA.length;
+            let li = aA.length;
+            if( li == undefined ){
+                return Object.keys( aA ).length;
+            }
+            return li;
         }
     } else {
         return 0;
@@ -293,18 +297,19 @@ function LCS( vecA, vecB ){
     if( lenA === 0 || lenB === 0 ){ 
         return 0; 
     }
+
     let C = new Array( lenA ).fill( 0 ).map( () => new Array( lenB ).fill( 0 ));//[[0 for i in range(len(vecB))] for i in range(len(vecA))]
     for( let i = 0; i < lenA; i+=1 ){
         for( let j = 0; j < lenB; j+=1 ){
             if( vecA[i] === vecB[j] ){
                 if( i !== 0 && j !== 0 ){
-                    C[i][j] = max( max( C[i][j-1]+1, C[i-1][j]+1 ), C[i-1][j-1] + 1);
+                    C[i][j] = C[i-1][j-1] + 1;
                 } else {
                     C[i][j] = 1;
                 }
             } else {
                 if( i !== 0 && j !== 0 ){
-                    C[i][j] = max( C[i][j-1], C[i-1][j] ); 
+                    C[i][j] = max( C[i][j-1], C[i-1][j] );
                 }
             }
         }
@@ -789,6 +794,100 @@ function setdiffmetric( vecA, vecB ){
     return Math.log( ( ABlen+1 )*( BAlen+1 ) );
 }
 
+/*------------------------------------------------------------------------------
+                     SPEZIELLE MASZE
+------------------------------------------------------------------------------*/
+
+function weightedngram( n, vecA, vecB, known ){
+    let distis = Infinity;
+    //known a letter statistic of ALL the corpus or a selected target subset or a in general asymetric heuristics
+    //str1 is how distant from str2 and vise versa
+
+    //at fisrt we come a Setdiffence of n-gram rep of str1 and str2
+    //let vecA = ngram( str1, n, False );
+    //let vecB = ngram( str2, n, False );
+    /*const lenA = len( vecA );
+    const lenB = len( vecB );
+    if( lenA === 0 || lenB === 0 ){ 
+        return Infinity; 
+    } 
+    let setA = set( vecA );
+    let setB = set( vecB );
+    let AB = SetDiff( setA, setB );
+    let BA = SetDiff( setB, setA );
+    const ABlen = len( AB );
+    const BAlen = len( BA );
+    let sd = Math.log( ( ABlen+1 )*( BAlen+1 ) );*/
+
+    const lenA = len( vecA );
+    const lenB = len( vecB );
+    if( lenA === 0 || lenB === 0 ){ 
+        return Infinity; 
+    } 
+    let setA = set(vecA);
+    let setB = set(vecB);
+    distis = 1.0-parseFloat((2.0*parseFloat(len( SetIntersection(setA, setB) )))/parseFloat(len(setA)+len(setB)))
+    if( distis != 1 ){
+    
+        let I = SetIntersection( setA, setB );
+        let lI = len(I);
+    
+        //let W = 0;
+        let WW = 0;
+        
+       /* for( let t = 0; t < lI; t += 1){
+            let gram = I[t];
+            let wtemp = 0;
+            for( let r = 0; r < n; r += 1 ){
+                if( known[ gram[r] ] ){
+                    wtemp += (1-known[ gram[r] ]);
+                } else {
+                    wtemp += 1;
+                }
+            }
+            wtemp /= n;
+            W += wtemp;
+        }
+        */
+        
+        let nB = {};
+        for( let t = 0; t < lI; t += 1){
+            let gram = I[t];
+            for( let r = 0; r < n; r += 1 ){
+                if( nB[ gram[r] ] ){
+                    nB[ gram[r] ] += 1;
+                } else {
+                    nB[ gram[r] ] = 1;
+                }
+            }
+        }
+        let countnb = 0;
+        for( let n in nB ){
+            if( known[ n ] ){
+                WW += (1-known[ n ]);
+            } else {
+                WW += 1;
+            }
+            countnb += 1;
+        }
+        WW /= countnb;
+
+        //W /= lI;
+
+        /*if(distis*W != distis*WW){
+            console.log(W, distis*W, WW, distis*WW, distis);
+        }*/
+
+        distis = distis*WW;
+
+        
+        
+    }
+    return distis;  
+} 
+
+
+
 /*
     Usage Summary of distances:
 WLEV( A, B, Wv, Ws )
@@ -815,3 +914,4 @@ setdiffmetric( vecA, vecB )
 
 
 */
+
