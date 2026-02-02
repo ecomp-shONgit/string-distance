@@ -24,7 +24,7 @@
 
 function len( aA ){
     if( aA ){
-        if( aA instanceof Set ){
+        /*if( aA instanceof Set ){
             return aA.size;
         } else {
             let li = aA.length;
@@ -32,6 +32,13 @@ function len( aA ){
                 return Object.keys( aA ).length;
             }
             return li;
+        }*/
+        if( aA instanceof Set ){
+            return aA.size;
+        } else if( aA instanceof Object ){
+            return Object.keys(aA).length;
+        } else {
+          return aA.length;
         }
     } else {
         return 0;
@@ -297,19 +304,18 @@ function LCS( vecA, vecB ){
     if( lenA === 0 || lenB === 0 ){ 
         return 0; 
     }
-
     let C = new Array( lenA ).fill( 0 ).map( () => new Array( lenB ).fill( 0 ));//[[0 for i in range(len(vecB))] for i in range(len(vecA))]
     for( let i = 0; i < lenA; i+=1 ){
         for( let j = 0; j < lenB; j+=1 ){
             if( vecA[i] === vecB[j] ){
                 if( i !== 0 && j !== 0 ){
-                    C[i][j] = C[i-1][j-1] + 1;
+                    C[i][j] = max( max( C[i][j-1]+1, C[i-1][j]+1 ), C[i-1][j-1] + 1);
                 } else {
                     C[i][j] = 1;
                 }
             } else {
                 if( i !== 0 && j !== 0 ){
-                    C[i][j] = max( C[i][j-1], C[i-1][j] );
+                    C[i][j] = max( C[i][j-1], C[i-1][j] ); 
                 }
             }
         }
@@ -862,9 +868,9 @@ function weightedngram( n, vecA, vecB, known ){
             }
         }
         let countnb = 0;
-        for( let n in nB ){
-            if( known[ n ] ){
-                WW += (1-known[ n ]);
+        for( let m in nB ){
+            if( known[ m ] ){
+                WW += (1-known[ m ]);
             } else {
                 WW += 1;
             }
